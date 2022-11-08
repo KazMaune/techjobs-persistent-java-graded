@@ -7,9 +7,11 @@ import java.util.List;
 @Entity
 public class Job extends AbstractEntity{
 
+    // creates a many to one relationship to employers
     @ManyToOne
     private Employer employer;
 
+    // creates a many to many relationship to skill
     @ManyToMany
     private List<Skill> skills = new ArrayList<>();
 

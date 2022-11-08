@@ -17,15 +17,18 @@ import java.util.Optional;
 @RequestMapping("skills")
 public class SkillController {
 
+    // injects SkillRepository and allows us to access data inside of the table
     @Autowired
     private SkillRepository skillRepository;
 
+    // displaying our add skill page
     @GetMapping("add")
     public String displayAddSkillForm(Model model) {
         model.addAttribute(new Skill());
         return "skills/add";
     }
 
+    // processes the form submission data from add-skill page and creates a new skill
     @PostMapping("add")
     public String processAddSkillForm(@ModelAttribute @Valid Skill newSkill,
                                          Errors errors, Model model) {
@@ -38,6 +41,7 @@ public class SkillController {
         return "redirect:";
     }
 
+    // displays our skill details by skill id
     @GetMapping("view/{skillId}")
     public String displayViewSkill(Model model, @PathVariable int skillId) {
 
@@ -51,6 +55,7 @@ public class SkillController {
         }
     }
 
+    // displays the list of all skills page
     @GetMapping("")
     public String index(Model model) {
         model.addAttribute("skills", skillRepository.findAll());

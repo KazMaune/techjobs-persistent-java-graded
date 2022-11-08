@@ -22,15 +22,19 @@ import java.util.Optional;
 @Controller
 public class HomeController {
 
+    // injects EmployerRepository and allows us to access data inside of the table
     @Autowired
     private EmployerRepository employerRepository;
 
+    // injects SkillRepository and allows us to access data inside of the table
     @Autowired
     private SkillRepository skillRepository;
 
+    // injects JobRepository and allows us to access data inside of the table
     @Autowired
     private JobRepository jobRepository;
 
+    // displays application homepage with a list of jobs
     @RequestMapping("")
     public String index(Model model) {
 
@@ -39,6 +43,7 @@ public class HomeController {
         return "index";
     }
 
+    // displays our add jobs form
     @GetMapping("add")
     public String displayAddJobForm(Model model) {
         model.addAttribute("skills", skillRepository.findAll());
@@ -48,6 +53,7 @@ public class HomeController {
         return "add";
     }
 
+    // processes the add-jobs form and creates a new job
     @PostMapping("add")
     public String processAddJobForm(@ModelAttribute @Valid Job newJob,
                                        Errors errors, Model model, @RequestParam int employerId, @RequestParam List<Integer> skills) {
@@ -64,6 +70,8 @@ public class HomeController {
         return "redirect:";
     }
 
+    // displays a job by id
+    // @TODO incomplete
     @GetMapping("view/{jobId}")
     public String displayViewJob(Model model, @PathVariable int jobId) {
 

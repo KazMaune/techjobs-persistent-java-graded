@@ -18,15 +18,20 @@ import static org.launchcode.techjobs.persistent.controllers.ListController.colu
 @RequestMapping("search")
 public class SearchController {
 
+
+    // injects JobRepository and allows us to access data inside of the table
     @Autowired
     private JobRepository jobRepository;
 
+
+    // displays the search form page
     @RequestMapping("")
     public String search(Model model) {
         model.addAttribute("columns", columnChoices);
         return "search";
     }
 
+    // displays search results page with job data
     @PostMapping("results")
     public String displaySearchResults(Model model, @RequestParam String searchType, @RequestParam String searchTerm){
         Iterable<Job> jobs;

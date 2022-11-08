@@ -14,6 +14,8 @@ public class Skill extends AbstractEntity {
     @Size(min = 3, max = 500)
     private String description;
 
+    // creates a many to many relationship mapped by skills
+    // the mapped by value lets us know what the name of the value is on the opposite side of this relationship
     @ManyToMany(mappedBy = "skills")
     private List<Job> jobs = new ArrayList<>();
 
